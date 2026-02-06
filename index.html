@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Liquid | Real-Time Tracker</title>
+    <title>Global Market Liquid | Real-Time Tracker</title>
     <style>
         :root {
             --bg: #000000;
@@ -23,59 +23,63 @@
             color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 2rem 0;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 2rem;
-            text-align: center;
+            width: 90%;
+            max-width: 1400px;
             z-index: 1;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
             letter-spacing: -0.05em;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
             background: linear-gradient(180deg, #fff 0%, #888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .crypto-grid {
+        .section-title {
+            text-align: left;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 2rem 0 1rem 0;
+            padding-left: 0.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 2.5rem;
+            padding: 1.5rem;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.1), transparent);
-            pointer-events: none;
+            min-height: 140px;
         }
 
         .card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
@@ -83,109 +87,186 @@
         .header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .icon-container {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .icon {
+            font-size: 1.5rem;
         }
 
         h2 {
             margin: 0;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .price {
-            font-size: 2.75rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-            transition: color 0.3s;
+            margin-bottom: 0.25rem;
+            font-family: 'SF Mono', SFMono-Regular, ui-monospace, monospace;
         }
 
         .change {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 100px;
+            padding: 2px 8px;
+            border-radius: 6px;
             display: inline-block;
         }
 
-        .change.up { background: rgba(52, 211, 153, 0.1); color: var(--up); }
-        .change.down { background: rgba(248, 113, 113, 0.1); color: var(--down); }
+        .up { color: var(--up); background: rgba(52, 211, 153, 0.1); }
+        .down { color: var(--down); background: rgba(248, 113, 113, 0.1); }
+
+        .widget-container {
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1.5rem;
+        }
 
         .glow {
-            position: absolute;
-            width: 150px;
-            height: 150px;
+            position: fixed;
+            width: 400px;
+            height: 400px;
             background: var(--accent);
-            filter: blur(100px);
-            opacity: 0.2;
+            filter: blur(150px);
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
 
         .footer {
-            margin-top: 4rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            font-weight: 500;
+            margin: 4rem 0;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="glow" style="top: 10%; left: 10%;"></div>
-    <div class="glow" style="bottom: 10%; right: 10%; background: #9333ea;"></div>
+    <div class="glow" style="top: -10%; left: -10%;"></div>
+    <div class="glow" style="bottom: -10%; right: -10%; background: #9333ea;"></div>
 
     <div class="container">
-        <h1>Crypto Liquid 💧</h1>
-        <div class="crypto-grid">
-            <!-- BTC -->
+        <h1>Global Markets Liquid 💧</h1>
+
+        <!-- Market Ticker Tape -->
+        <div class="widget-container" style="height: 40px; margin-bottom: 2rem;">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                "symbols": [
+                    { "proName": "FOREXCOM:SPX2000", "title": "S&P 500" },
+                    { "proName": "FOREXCOM:NSXUSD", "title": "Nasdaq 100" },
+                    { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
+                    { "proName": "BITSTAMP:BTCUSD", "title": "BTC/USD" },
+                    { "proName": "FX_IDC:USDMMK", "title": "USD/MMK" }
+                ],
+                "showSymbolLogo": true,
+                "colorTheme": "dark",
+                "isTransparent": true,
+                "displayMode": "adaptive",
+                "locale": "en"
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- Real-Time Crypto Section -->
+        <div class="section-title">REAL-TIME CRYPTO (BINANCE)</div>
+        <div class="grid">
             <div class="card" id="btc-card">
-                <div class="header">
-                    <div class="icon-container">
-                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" width="28">
-                    </div>
-                    <h2>Bitcoin</h2>
-                </div>
+                <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
             </div>
-
-            <!-- ETH -->
             <div class="card" id="eth-card">
-                <div class="header">
-                    <div class="icon-container">
-                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" width="28">
-                    </div>
-                    <h2>Ethereum</h2>
-                </div>
+                <div class="header"><span class="icon">Ξ</span><h2>Ethereum</h2></div>
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
             </div>
-
-            <!-- ETC -->
             <div class="card" id="etc-card">
-                <div class="header">
-                    <div class="icon-container">
-                        <img src="https://cryptologos.cc/logos/ethereum-classic-etc-logo.svg" width="28">
-                    </div>
-                    <h2>ETC</h2>
-                </div>
+                <div class="header"><span class="icon">⟠</span><h2>ETC</h2></div>
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
             </div>
         </div>
-        <p class="footer">Live feed via Binance WebSocket • Liquid Crystal Design</p>
+
+        <!-- Commodities & Forex Section -->
+        <div class="section-title">COMMODITIES & STOCKS</div>
+        <div class="grid">
+            <!-- Gold -->
+            <div class="card">
+                <div class="header"><span class="icon">🟡</span><h2>Gold (Global)</h2></div>
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                    {
+                    "symbol": "TVC:GOLD",
+                    "width": "100%",
+                    "colorTheme": "dark",
+                    "isTransparent": true,
+                    "locale": "en"
+                    }
+                    </script>
+                </div>
+            </div>
+            <!-- Oil -->
+            <div class="card">
+                <div class="header"><span class="icon">🛢️</span><h2>Brent Crude Oil</h2></div>
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                    {
+                    "symbol": "TVC:UKOIL",
+                    "width": "100%",
+                    "colorTheme": "dark",
+                    "isTransparent": true,
+                    "locale": "en"
+                    }
+                    </script>
+                </div>
+            </div>
+            <!-- Stocks (Apple) -->
+            <div class="card">
+                <div class="header"><span class="icon"></span><h2>Apple Inc.</h2></div>
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                    {
+                    "symbol": "NASDAQ:AAPL",
+                    "width": "100%",
+                    "colorTheme": "dark",
+                    "isTransparent": true,
+                    "locale": "en"
+                    }
+                    </script>
+                </div>
+            </div>
+             <!-- Stocks (Nvidia) -->
+             <div class="card">
+                <div class="header"><span class="icon">🟢</span><h2>NVIDIA Corp.</h2></div>
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                    {
+                    "symbol": "NASDAQ:NVDA",
+                    "width": "100%",
+                    "colorTheme": "dark",
+                    "isTransparent": true,
+                    "locale": "en"
+                    }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <p class="footer">Hybrid Feed: Binance WebSocket + TradingView Intelligence • 2026</p>
     </div>
 
     <script>
@@ -198,7 +279,7 @@
             const symbol = data.s.toLowerCase();
             const priceVal = parseFloat(data.c);
             const price = priceVal.toLocaleString(undefined, { 
-                minimumFractionDigits: symbol === 'btcusdt' ? 2 : (symbol === 'etcusdt' ? 3 : 2)
+                minimumFractionDigits: 2
             });
             const change = parseFloat(data.P).toFixed(2);
             
