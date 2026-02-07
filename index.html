@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Liquid | Crystal Tracker</title>
+    <title>Global Market Liquid | Glass Edition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a; /* Slate 900 - Lighter than black */
-            --glass-bg: rgba(30, 41, 59, 0.5); /* Lighter glass */
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg: #030712;
+            --glass-surface: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-highlight: rgba(255, 255, 255, 0.08);
             --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
+            --text-secondary: rgba(248, 250, 252, 0.5);
             --accent: #38bdf8;
             --up: #10b981;
             --down: #f43f5e;
-            --card-radius: 24px;
+            --card-radius: 28px;
         }
 
         * { 
@@ -28,9 +29,8 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(at 0% 0%, #1e293b 0, transparent 50%), 
-                radial-gradient(at 50% 0%, #0f172a 0, transparent 50%), 
-                radial-gradient(at 100% 0%, #1e1b4b 0, transparent 50%);
+                radial-gradient(at 0% 0%, #0f172a 0, transparent 50%), 
+                radial-gradient(at 100% 100%, #1e1b4b 0, transparent 50%);
             color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
             margin: 0;
@@ -44,26 +44,27 @@
         .container {
             width: 92%;
             max-width: 1400px;
-            padding: 3rem 0;
+            padding: 4rem 0;
         }
 
         h1 {
             font-size: clamp(2rem, 6vw, 3.5rem);
             font-weight: 800;
             text-align: center;
-            margin-bottom: 2.5rem;
-            background: linear-gradient(to right, #fff, #cbd5e1);
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .section-title {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             color: var(--accent);
-            margin: 3.5rem 0 1.5rem 0;
+            margin: 4rem 0 2rem 0;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -78,27 +79,45 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
-        /* Rectangular Card Design */
+        /* Enhanced Glassmorphism Card */
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: linear-gradient(135deg, var(--glass-surface) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
             border-radius: var(--card-radius);
-            padding: 2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 30px -10px rgba(0,0,0,0.5),
+                inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+
+        /* Glass Shine Effect */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, var(--glass-highlight) 0%, transparent 100%);
+            pointer-events: none;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.4);
-            background: rgba(30, 41, 59, 0.7);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            box-shadow: 
+                0 30px 60px -12px rgba(0,0,0,0.6),
+                inset 0 1px 1px rgba(255,255,255,0.2);
         }
 
         .header {
@@ -110,121 +129,140 @@
 
         .icon {
             font-size: 1.5rem;
-            color: var(--accent);
+            opacity: 0.9;
         }
 
         h2 {
             margin: 0;
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
         }
 
         .price {
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            font-family: monospace;
+            letter-spacing: -0.03em;
+            color: #fff;
         }
 
         .change {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 8px;
-            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .up { color: var(--up); background: rgba(16, 185, 129, 0.1); }
-        .down { color: var(--down); background: rgba(244, 63, 94, 0.1); }
+        .up { color: var(--up); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .down { color: var(--down); background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.2); }
 
-        /* Alert Box */
+        /* Alert Glass Style */
         .alert-box {
-            margin-top: 1.5rem;
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 16px;
-            padding: 1rem;
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .alert-input-group {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .alert-input {
-            background: rgba(30, 41, 59, 0.8);
+            background: rgba(255,255,255,0.05);
             border: 1px solid var(--glass-border);
             color: white;
-            padding: 8px 12px;
-            border-radius: 10px;
+            padding: 10px 15px;
+            border-radius: 12px;
             flex: 1;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             outline: none;
+            transition: all 0.3s;
+        }
+
+        .alert-input:focus {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.08);
         }
 
         .alert-btn {
-            background: var(--accent);
-            color: #0f172a;
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 0 15px;
-            border-radius: 10px;
+            padding: 0 20px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
+            transition: transform 0.2s;
         }
 
-        /* Widgets */
+        .alert-btn:hover { transform: scale(1.05); }
+
+        /* Widget Containers */
         .widget-wrapper {
             border-radius: var(--card-radius);
             overflow: hidden;
-            background: var(--glass-bg);
+            background: var(--glass-surface);
             border: 1px solid var(--glass-border);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
 
-        /* Learning Cards */
+        /* Concept Cards */
         .concept-card {
-            background: var(--glass-bg);
+            background: var(--glass-surface);
             border-radius: var(--card-radius);
-            padding: 1.5rem;
+            padding: 2rem;
             border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
 
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.1rem; }
-        .concept-card p { font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0; }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.2rem; }
+        .concept-card p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 0; }
 
         footer {
-            margin: 5rem 0 3rem 0;
+            margin: 6rem 0 4rem 0;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-align: center;
         }
 
         #notification-toast {
             position: fixed;
-            bottom: 30px;
+            top: 30px;
             right: 30px;
-            background: var(--accent);
-            color: #0f172a;
-            padding: 15px 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             display: none;
             z-index: 1000;
+            border: 1px solid rgba(255,255,255,0.2);
             font-weight: 600;
-            animation: slideIn 0.3s ease-out;
+            animation: glassIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+        @keyframes glassIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Market Intelligence</h1>
+        <h1>Global Liquidity</h1>
 
         <!-- Ticker -->
         <div class="widget-wrapper" style="height: 40px;">
@@ -251,46 +289,43 @@
 
         <div class="section-title">Real-Time Crypto</div>
         <div class="grid">
-            <!-- BTC -->
             <div class="card" id="btc-card">
                 <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
-                        <input type="number" id="btc-alert-input" class="alert-input" placeholder="Price">
+                        <input type="number" id="btc-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('btc')">Set</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
-            <!-- ETH -->
             <div class="card" id="eth-card">
                 <div class="header"><span class="icon">Ξ</span><h2>Ethereum</h2></div>
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
-                        <input type="number" id="eth-alert-input" class="alert-input" placeholder="Price">
+                        <input type="number" id="eth-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('eth')">Set</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
-            <!-- ETC -->
             <div class="card" id="etc-card">
                 <div class="header"><span class="icon">⟠</span><h2>ETC</h2></div>
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
-                        <input type="number" id="etc-alert-input" class="alert-input" placeholder="Price">
+                        <input type="number" id="etc-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('etc')">Set</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
         </div>
@@ -359,8 +394,8 @@
             </div>
         </div>
 
-        <div class="section-title">Market Pulse & News</div>
-        <div class="widget-wrapper" style="height: 500px;">
+        <div class="section-title">Market Pulse</div>
+        <div class="widget-wrapper" style="height: 600px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
@@ -399,7 +434,7 @@
         </div>
 
         <footer>
-            Crystal Analytics by Ko Paing • Binance & TradingView API • 2026
+            Premium Glass Experience by Ko Paing • 2026 Edition
         </footer>
     </div>
 
@@ -426,20 +461,20 @@
             if (priceEl) {
                 const oldPrice = parseFloat(priceEl.innerText.replace(/[$,]/g, '')) || 0;
                 priceEl.innerText = `$${price}`;
-                changeEl.innerText = `${change > 0 ? '+' : ''}${change}%`;
+                changeEl.innerText = `${change > 0 ? '▲' : '▼'} ${Math.abs(change)}%`;
                 changeEl.className = `change ${change >= 0 ? 'up' : 'down'}`;
 
                 if (priceVal > oldPrice && oldPrice !== 0) {
                     priceEl.style.color = '#10b981';
-                    setTimeout(() => priceEl.style.color = '#f8fafc', 500);
+                    setTimeout(() => priceEl.style.color = '#fff', 500);
                 } else if (priceVal < oldPrice && oldPrice !== 0) {
                     priceEl.style.color = '#f43f5e';
-                    setTimeout(() => priceEl.style.color = '#f8fafc', 500);
+                    setTimeout(() => priceEl.style.color = '#fff', 500);
                 }
 
                 // Check Alert
                 if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`🔔 ALERT: ${id.toUpperCase()} reached target $${alerts[id]}`);
+                    showNotification(`💎 GLASS ALERT: ${id.toUpperCase()} hit $${price}`);
                     alerts[id] = null;
                     document.getElementById(`${id}-active-alert`).innerText = "";
                 }
@@ -450,8 +485,8 @@
             const val = document.getElementById(`${coin}-alert-input`).value;
             if (val) {
                 alerts[coin] = parseFloat(val);
-                document.getElementById(`${coin}-active-alert`).innerText = `Active Alert at $${parseFloat(val).toLocaleString()}`;
-                showNotification(`✅ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+                document.getElementById(`${coin}-active-alert`).innerText = `Alert active at $${parseFloat(val).toLocaleString()}`;
+                showNotification(`✨ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
             }
         }
 
