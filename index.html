@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Liquid | Fixed Crystal Pro</title>
+    <title>Market Liquid | Crystal Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #050507;
-            --card-surface: rgba(22, 22, 24, 0.8);
+            --card-surface: rgba(22, 22, 24, 0.85);
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
             --accent: #0071e3;
@@ -37,7 +37,6 @@
             position: relative;
         }
 
-        /* --- Optimized Background Animation --- */
         .bg-animate {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -72,7 +71,7 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: clamp(2.2rem, 6vw, 3.5rem);
             font-weight: 700;
             text-align: center;
             margin-bottom: 3rem;
@@ -107,13 +106,12 @@
             gap: 1.5rem;
         }
 
-        /* Fixed 3D LCD Card */
         .card {
             background: var(--card-surface);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             border-radius: var(--card-radius);
-            padding: 1.75rem;
+            padding: 2rem;
             position: relative;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -124,7 +122,6 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            overflow: hidden; /* Prevent content burst */
         }
 
         .card:hover {
@@ -139,9 +136,7 @@
             margin-bottom: 1rem;
         }
 
-        .icon {
-            font-size: 1.5rem;
-        }
+        .icon { font-size: 1.5rem; }
 
         h2 {
             margin: 0;
@@ -151,7 +146,7 @@
         }
 
         .price {
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
@@ -159,9 +154,9 @@
         }
 
         .change {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 100px;
             display: inline-flex;
             align-items: center;
@@ -174,44 +169,41 @@
         /* Fixed Alert Section */
         .alert-box {
             margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 18px;
             border: 1px solid rgba(255,255,255,0.05);
         }
 
         .alert-input-group {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
-            width: 100%;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .alert-input {
             background: rgba(10, 10, 12, 0.8);
             border: 1px solid rgba(255,255,255,0.15);
             color: white;
-            padding: 8px 12px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
-            min-width: 0; /* Important for flex shrink */
+            min-width: 0;
         }
 
         .alert-btn {
             background: var(--text-primary);
             color: #000;
             border: none;
-            padding: 0 14px;
-            border-radius: 10px;
+            padding: 0 16px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             flex-shrink: 0;
-            transition: opacity 0.2s;
         }
-        .alert-btn:hover { opacity: 0.8; }
 
         .widget-wrapper {
             border-radius: var(--card-radius);
@@ -219,18 +211,17 @@
             background: var(--card-surface);
             border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .concept-card {
             background: var(--card-surface);
             border-radius: var(--card-radius);
-            padding: 2rem;
+            padding: 2.5rem;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.2rem; margin-bottom: 0.75rem; }
-        .concept-card p { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; margin-bottom: 1rem; }
+        .concept-card p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); }
 
         footer {
             margin: 6rem 0 4rem 0;
@@ -239,30 +230,25 @@
             text-align: center;
         }
 
+        /* Fixed Notification Toast */
         #notification-toast {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(30, 30, 32, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(44, 44, 46, 0.95);
+            backdrop-filter: blur(25px);
             color: white;
-            padding: 15px 25px;
-            border-radius: 16px;
+            padding: 20px 30px;
+            border-radius: 18px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             display: none;
-            z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.15);
-            font-size: 0.95rem;
-            animation: slideIn 0.4s ease;
+            z-index: 9999;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            animation: slideIn 0.5s ease;
         }
 
-        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            .grid { grid-template-columns: 1fr; }
-            .price { font-size: 2rem; }
-        }
+        @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -272,7 +258,7 @@
     </div>
 
     <div class="container">
-        <h1>Market Pulse</h1>
+        <h1>Global Markets</h1>
 
         <div class="widget-wrapper" style="height: 46px;">
             <div class="tradingview-widget-container">
@@ -293,19 +279,19 @@
             </div>
         </div>
 
-        <div class="section-title">Live Trading Flow</div>
+        <div class="section-title">Live Real-Time</div>
         <div class="grid">
             <div class="card" id="btc-card">
                 <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="btc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('btc')">SET</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="btc-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
             <div class="card" id="eth-card">
@@ -313,12 +299,12 @@
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="eth-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('eth')">SET</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="eth-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
             <div class="card" id="etc-card">
@@ -326,12 +312,12 @@
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="etc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('etc')">SET</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="etc-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
         </div>
@@ -377,7 +363,7 @@
         </div>
 
         <div class="section-title">Timeline Stream</div>
-        <div class="widget-wrapper" style="height: 600px;">
+        <div class="widget-wrapper" style="height: 500px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
@@ -386,7 +372,7 @@
             </div>
         </div>
 
-        <div class="section-title">Academy</div>
+        <div class="section-title">Learning Center</div>
         <div class="grid">
             <div class="concept-card">
                 <h3>Spot Trading</h3>
@@ -407,7 +393,7 @@
         </div>
 
         <footer>
-            Stable Crystal Experience • 2026 Edition
+            Crystal Intelligence • 2026 Edition
         </footer>
     </div>
 
@@ -415,7 +401,12 @@
 
     <script>
         const symbols = ['btcusdt', 'ethusdt', 'etcusdt'];
-        const alerts = { btc: null, eth: null, etc: null };
+        const alerts = { 
+            btc: { target: null, type: null }, 
+            eth: { target: null, type: null }, 
+            etc: { target: null, type: null } 
+        };
+        
         const wsUrl = `wss://stream.binance.com:9443/ws/${symbols.map(s => `${s}@ticker`).join('/')}`;
         const ws = new WebSocket(wsUrl);
 
@@ -423,15 +414,16 @@
             const data = JSON.parse(event.data);
             const symbol = data.s.toLowerCase();
             const priceVal = parseFloat(data.c);
-            const price = priceVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            const priceStr = priceVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
             const change = parseFloat(data.P).toFixed(2);
             let id = symbol.replace('usdt', '');
+            
             const priceEl = document.getElementById(`${id}-price`);
             const changeEl = document.getElementById(`${id}-change`);
 
             if (priceEl) {
                 const oldPrice = parseFloat(priceEl.innerText.replace(/[$,]/g, '')) || 0;
-                priceEl.innerText = `$${price}`;
+                priceEl.innerText = `$${priceStr}`;
                 changeEl.innerText = `${change > 0 ? '▲' : '▼'} ${Math.abs(change)}%`;
                 changeEl.className = `change ${change >= 0 ? 'up' : 'down'}`;
 
@@ -443,20 +435,50 @@
                     setTimeout(() => priceEl.style.color = '#fff', 400);
                 }
 
-                if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`🔔 ALERT: ${id.toUpperCase()} reached $${price}`);
-                    alerts[id] = null;
-                    document.getElementById(`${id}-active-alert`).innerText = "";
+                // IMPROVED ALERT LOGIC
+                const alert = alerts[id];
+                if (alert.target !== null) {
+                    let triggered = false;
+                    if (alert.type === 'above' && priceVal >= alert.target) triggered = true;
+                    if (alert.type === 'below' && priceVal <= alert.target) triggered = true;
+
+                    if (triggered) {
+                        showNotification(`🚀 ${id.toUpperCase()} Alert: $${priceStr} (Target: $${alert.target.toLocaleString()})`);
+                        alert.target = null; // Reset
+                        alert.type = null;
+                        document.getElementById(`${id}-active-alert`).innerText = "";
+                        
+                        // Play alert sound
+                        try {
+                            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                            const oscillator = audioCtx.createOscillator();
+                            oscillator.type = 'sine';
+                            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                            oscillator.connect(audioCtx.destination);
+                            oscillator.start();
+                            oscillator.stop(audioCtx.currentTime + 0.3);
+                        } catch(e) {}
+                    }
                 }
             }
         };
 
         function setAlert(coin) {
-            const val = document.getElementById(`${coin}-alert-input`).value;
-            if (val) {
-                alerts[coin] = parseFloat(val);
-                document.getElementById(`${coin}-active-alert`).innerText = `Active: $${parseFloat(val).toLocaleString()}`;
-                showNotification(`✅ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+            const input = document.getElementById(`${coin}-alert-input`);
+            const val = parseFloat(input.value);
+            const currentPrice = parseFloat(document.getElementById(`${coin}-price`).innerText.replace(/[$,]/g, '')) || 0;
+
+            if (val && currentPrice > 0) {
+                const type = val > currentPrice ? 'above' : 'below';
+                alerts[coin] = { target: val, type: type };
+                
+                const typeText = type === 'above' ? 'Rise Above' : 'Drop Below';
+                document.getElementById(`${coin}-active-alert`).innerText = `🔔 Alert: ${typeText} $${val.toLocaleString()}`;
+                
+                showNotification(`✅ Alert set: ${coin.toUpperCase()} ${typeText} $${val.toLocaleString()}`);
+                input.value = "";
+            } else {
+                alert("Please enter a valid price.");
             }
         }
 
@@ -464,7 +486,7 @@
             const toast = document.getElementById('notification-toast');
             toast.innerText = msg;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 6000);
+            setTimeout(() => { toast.style.display = 'none'; }, 8000);
         }
     </script>
 </body>
