@@ -110,11 +110,11 @@
             background: var(--card-surface);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--card-radius);
             padding: 2rem;
             position: relative;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
                 0 15px 30px rgba(0, 0, 0, 0.4),
                 inset 1px 1px 2px rgba(255, 255, 255, 0.1),
@@ -166,7 +166,6 @@
         .up { color: var(--up); background: rgba(50, 215, 75, 0.1); border: 1px solid rgba(50, 215, 75, 0.2); }
         .down { color: var(--down); background: rgba(255, 69, 58, 0.1); border: 1px solid rgba(255, 69, 58, 0.2); }
 
-        /* Fixed Alert Section */
         .alert-box {
             margin-top: 1.5rem;
             padding: 1.25rem;
@@ -238,17 +237,32 @@
             background: rgba(44, 44, 46, 0.95);
             backdrop-filter: blur(25px);
             color: white;
-            padding: 20px 30px;
+            padding: 25px 30px;
             border-radius: 18px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             display: none;
+            flex-direction: column;
+            gap: 15px;
             z-index: 9999;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid var(--accent);
             font-weight: 600;
             animation: slideIn 0.5s ease;
         }
 
         @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .stop-btn {
+            background: var(--down);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255, 69, 58, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -397,7 +411,10 @@
         </footer>
     </div>
 
-    <div id="notification-toast"></div>
+    <div id="notification-toast">
+        <div id="toast-msg"></div>
+        <button class="stop-btn" onclick="stopAlarm()">Stop Alarm</button>
+    </div>
 
     <script>
         const symbols = ['btcusdt', 'ethusdt', 'etcusdt'];
@@ -406,6 +423,9 @@
             eth: { target: null, type: null }, 
             etc: { target: null, type: null } 
         };
+        
+        let alarmInterval = null;
+        let audioCtx = null;
         
         const wsUrl = `wss://stream.binance.com:9443/ws/${symbols.map(s => `${s}@ticker`).join('/')}`;
         const ws = new WebSocket(wsUrl);
@@ -435,7 +455,6 @@
                     setTimeout(() => priceEl.style.color = '#fff', 400);
                 }
 
-                // IMPROVED ALERT LOGIC
                 const alert = alerts[id];
                 if (alert.target !== null) {
                     let triggered = false;
@@ -443,21 +462,10 @@
                     if (alert.type === 'below' && priceVal <= alert.target) triggered = true;
 
                     if (triggered) {
-                        showNotification(`🚀 ${id.toUpperCase()} Alert: $${priceStr} (Target: $${alert.target.toLocaleString()})`);
-                        alert.target = null; // Reset
+                        triggerAlarm(`🚀 ${id.toUpperCase()} Target Hit: $${priceStr}`);
+                        alert.target = null;
                         alert.type = null;
                         document.getElementById(`${id}-active-alert`).innerText = "";
-                        
-                        // Play alert sound
-                        try {
-                            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                            const oscillator = audioCtx.createOscillator();
-                            oscillator.type = 'sine';
-                            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-                            oscillator.connect(audioCtx.destination);
-                            oscillator.start();
-                            oscillator.stop(audioCtx.currentTime + 0.3);
-                        } catch(e) {}
                     }
                 }
             }
@@ -471,22 +479,54 @@
             if (val && currentPrice > 0) {
                 const type = val > currentPrice ? 'above' : 'below';
                 alerts[coin] = { target: val, type: type };
-                
                 const typeText = type === 'above' ? 'Rise Above' : 'Drop Below';
-                document.getElementById(`${coin}-active-alert`).innerText = `🔔 Alert: ${typeText} $${val.toLocaleString()}`;
-                
-                showNotification(`✅ Alert set: ${coin.toUpperCase()} ${typeText} $${val.toLocaleString()}`);
+                document.getElementById(`${coin}-active-alert`).innerText = `🔔 Active: ${typeText} $${val.toLocaleString()}`;
                 input.value = "";
-            } else {
-                alert("Please enter a valid price.");
+                
+                // Initialize audio context on first interaction
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
         }
 
-        function showNotification(msg) {
-            const toast = document.getElementById('notification-toast');
-            toast.innerText = msg;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 8000);
+        function triggerAlarm(msg) {
+            document.getElementById('toast-msg').innerText = msg;
+            document.getElementById('notification-toast').style.display = 'flex';
+            
+            if (alarmInterval) clearInterval(alarmInterval);
+            
+            // Repeat alarm sound every 1 second
+            playAlarmSound();
+            alarmInterval = setInterval(playAlarmSound, 1000);
+        }
+
+        function playAlarmSound() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'square'; // Louder/harsher than sine
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch
+                osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+                
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } catch(e) { console.error("Audio error", e); }
+        }
+
+        function stopAlarm() {
+            if (alarmInterval) {
+                clearInterval(alarmInterval);
+                alarmInterval = null;
+            }
+            document.getElementById('notification-toast').style.display = 'none';
         }
     </script>
 </body>
