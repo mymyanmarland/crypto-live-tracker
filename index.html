@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Liquid | Dynamic Crystal Edition</title>
+    <title>Market Liquid | Fixed Crystal Pro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #050507;
-            --card-surface: rgba(20, 20, 22, 0.75);
+            --card-surface: rgba(22, 22, 24, 0.8);
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
             --accent: #0071e3;
@@ -22,14 +22,13 @@
         * { 
             box-sizing: border-box; 
             -webkit-font-smoothing: antialiased;
+            margin: 0; padding: 0;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text-primary);
             font-family: 'Inter', -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -38,7 +37,7 @@
             position: relative;
         }
 
-        /* --- VIBRANT Background Animation --- */
+        /* --- Optimized Background Animation --- */
         .bg-animate {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -49,256 +48,233 @@
 
         .blob {
             position: absolute;
-            width: 800px;
-            height: 800px;
+            width: 70vw;
+            height: 70vw;
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4; /* Increased opacity */
+            filter: blur(80px);
+            opacity: 0.3;
             animation: move 25s infinite alternate ease-in-out;
         }
 
-        .blob-1 { 
-            top: -10%; left: -10%; 
-            background: radial-gradient(circle, rgba(0, 113, 227, 0.4) 0%, transparent 70%); 
-        }
-        .blob-2 { 
-            bottom: -10%; right: -10%; 
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.3) 0%, transparent 70%); 
-            animation-delay: -7s; 
-        }
-        .blob-3 { 
-            top: 30%; right: 20%; 
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%); 
-            animation-duration: 30s; 
-            animation-delay: -3s;
-        }
-        .blob-4 { 
-            bottom: 20%; left: 10%; 
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%); 
-            animation-duration: 22s;
-        }
+        .blob-1 { top: -10%; left: -10%; background: radial-gradient(circle, #0071e3 0%, transparent 70%); }
+        .blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, #9333ea 0%, transparent 70%); animation-delay: -7s; }
 
         @keyframes move {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(150px, -100px) scale(1.1) rotate(90deg); }
-            100% { transform: translate(-50px, 150px) scale(1) rotate(180deg); }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(10vw, 10vh) scale(1.1); }
         }
 
-        /* --- Content --- */
         .container {
-            width: 90%;
-            max-width: 1300px;
-            padding: 4rem 0;
+            width: 94%;
+            max-width: 1200px;
+            padding: 3rem 0;
             z-index: 1;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4.2rem);
-            font-weight: 800;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 4rem;
-            letter-spacing: -0.03em;
-            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #fff 0%, #888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .section-title {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-primary);
-            margin: 5rem 0 2.5rem 0;
+            color: var(--text-secondary);
+            margin: 4rem 0 1.5rem 0;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .section-title::after {
             content: "";
             flex: 1;
             height: 1px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.1);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        /* High-Definition 3D LCD Card */
+        /* Fixed 3D LCD Card */
         .card {
             background: var(--card-surface);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border-radius: var(--card-radius);
-            padding: 2.5rem;
+            padding: 1.75rem;
             position: relative;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.5),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.08),
-                inset -2px -2px 10px rgba(0, 0, 0, 0.6);
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 4px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: hidden; /* Prevent content burst */
         }
 
         .card:hover {
-            transform: translateY(-12px) scale(1.03);
+            transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.25);
-            background: rgba(40, 40, 45, 0.85);
-            box-shadow: 
-                0 50px 100px rgba(0, 0, 0, 0.7),
-                inset 4px 4px 8px rgba(255, 255, 255, 0.15),
-                inset -4px -4px 12px rgba(0, 0, 0, 0.7);
         }
 
         .header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 2rem;
+            gap: 12px;
+            margin-bottom: 1rem;
         }
 
         .icon {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
+            font-size: 1.5rem;
         }
 
         h2 {
             margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 500;
             color: var(--text-secondary);
         }
 
         .price {
-            font-size: 3.2rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
-            font-variant-numeric: tabular-nums;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-family: 'SF Mono', menlo, monospace;
         }
 
         .change {
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 4px 12px;
             border-radius: 100px;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: fit-content;
         }
 
-        .up { color: var(--up); background: rgba(50, 215, 75, 0.15); border: 1px solid rgba(50, 215, 75, 0.3); }
-        .down { color: var(--down); background: rgba(255, 69, 58, 0.15); border: 1px solid rgba(255, 69, 58, 0.3); }
+        .up { color: var(--up); background: rgba(50, 215, 75, 0.1); border: 1px solid rgba(50, 215, 75, 0.2); }
+        .down { color: var(--down); background: rgba(255, 69, 58, 0.1); border: 1px solid rgba(255, 69, 58, 0.2); }
 
+        /* Fixed Alert Section */
         .alert-box {
-            margin-top: 2.5rem;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .alert-input-group {
             display: flex;
-            gap: 12px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 8px;
+            width: 100%;
         }
 
         .alert-input {
             background: rgba(10, 10, 12, 0.8);
             border: 1px solid rgba(255,255,255,0.15);
             color: white;
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 8px 12px;
+            border-radius: 10px;
             flex: 1;
-            font-size: 1rem;
+            font-size: 0.9rem;
             outline: none;
+            min-width: 0; /* Important for flex shrink */
         }
-
-        .alert-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 113, 227, 0.3); }
 
         .alert-btn {
             background: var(--text-primary);
             color: #000;
             border: none;
-            padding: 0 22px;
-            border-radius: 12px;
+            padding: 0 14px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 800;
-            transition: all 0.2s;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: opacity 0.2s;
         }
-        .alert-btn:hover { transform: scale(1.05); background: #fff; }
+        .alert-btn:hover { opacity: 0.8; }
 
         .widget-wrapper {
-            border-radius: 30px;
+            border-radius: var(--card-radius);
             overflow: hidden;
             background: var(--card-surface);
             border: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 3rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .concept-card {
             background: var(--card-surface);
-            border-radius: 30px;
-            padding: 3rem;
+            border-radius: var(--card-radius);
+            padding: 2rem;
             border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.5rem; margin-bottom: 1rem; }
-        .concept-card p { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 0; }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.2rem; margin-bottom: 0.75rem; }
+        .concept-card p { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); }
 
         footer {
-            margin: 8rem 0 5rem 0;
+            margin: 6rem 0 4rem 0;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.85rem;
             text-align: center;
-            opacity: 0.8;
         }
 
         #notification-toast {
             position: fixed;
-            top: 40px;
-            right: 40px;
-            background: rgba(30, 30, 35, 0.95);
-            backdrop-filter: blur(25px);
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 30, 32, 0.95);
+            backdrop-filter: blur(20px);
             color: white;
-            padding: 25px 45px;
-            border-radius: 25px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             display: none;
             z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-weight: 600;
-            font-size: 1.1rem;
-            animation: slideDown 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255,255,255,0.15);
+            font-size: 0.95rem;
+            animation: slideIn 0.4s ease;
         }
 
-        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .grid { grid-template-columns: 1fr; }
+            .price { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
     <div class="bg-animate">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob blob-4"></div>
     </div>
 
     <div class="container">
-        <h1>Global Markets</h1>
+        <h1>Market Pulse</h1>
 
-        <div class="widget-wrapper" style="height: 54px;">
+        <div class="widget-wrapper" style="height: 46px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
@@ -324,12 +300,12 @@
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600;">LCD Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="btc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('btc')">SET</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.8rem; margin-top: 12px; color: var(--accent); font-weight: 600;"></div>
+                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
             <div class="card" id="eth-card">
@@ -337,12 +313,12 @@
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600;">LCD Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="eth-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('eth')">SET</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.8rem; margin-top: 12px; color: var(--accent); font-weight: 600;"></div>
+                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
             <div class="card" id="etc-card">
@@ -350,12 +326,12 @@
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600;">LCD Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="etc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('etc')">SET</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.8rem; margin-top: 12px; color: var(--accent); font-weight: 600;"></div>
+                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
         </div>
@@ -431,7 +407,7 @@
         </div>
 
         <footer>
-            Dynamic Motion Experience • 2026 Edition
+            Stable Crystal Experience • 2026 Edition
         </footer>
     </div>
 
@@ -468,7 +444,7 @@
                 }
 
                 if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`🛎️ ALERT: ${id.toUpperCase()} reached $${price}`);
+                    showNotification(`🔔 ALERT: ${id.toUpperCase()} reached $${price}`);
                     alerts[id] = null;
                     document.getElementById(`${id}-active-alert`).innerText = "";
                 }
@@ -480,7 +456,7 @@
             if (val) {
                 alerts[coin] = parseFloat(val);
                 document.getElementById(`${coin}-active-alert`).innerText = `Active: $${parseFloat(val).toLocaleString()}`;
-                showNotification(`✨ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+                showNotification(`✅ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
             }
         }
 
