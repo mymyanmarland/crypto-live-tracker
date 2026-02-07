@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Liquid | Space Glass Pro</title>
+    <title>Global Market Liquid | Liquid Crystal Edition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Space Gray Palette (Balanced Dark) */
-            --bg: #1c1c1e; /* Apple Space Gray */
-            --card-bg: rgba(44, 44, 46, 0.6); /* Translucent dark */
-            --glass-border: rgba(255, 255, 255, 0.15); /* The "Glass Border" */
-            --glass-edge: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1a6;
-            --accent: #0a84ff; /* Apple Blue */
-            --up: #32d74b; /* Apple Green */
-            --down: #ff453a; /* Apple Red */
-            --card-radius: 20px;
+            /* Apple Liquid Crystal Display Palette */
+            --bg: #121212;
+            --card-surface: rgba(28, 28, 30, 0.7);
+            --lcd-glow: rgba(0, 113, 227, 0.15);
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #0071e3;
+            --up: #32d74b;
+            --down: #ff453a;
+            --card-radius: 22px;
         }
 
         * { 
@@ -30,10 +29,10 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 50% -20%, #2c2c2e, transparent 70%),
-                radial-gradient(circle at 0% 100%, #1c1c1e, transparent 50%);
+                radial-gradient(circle at 50% 0%, #1c1c1e 0%, transparent 80%),
+                radial-gradient(circle at 100% 100%, #0a0a0a 0%, transparent 50%);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -44,202 +43,227 @@
 
         .container {
             width: 90%;
-            max-width: 1200px;
-            padding: 3rem 0;
+            max-width: 1300px;
+            padding: 4rem 0;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.2rem, 7vw, 3.8rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             letter-spacing: -0.02em;
+            background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-title {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--text-secondary);
-            margin: 3rem 0 1.5rem 0;
+            margin: 4.5rem 0 2rem 0;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .section-title::after {
             content: "";
             flex: 1;
             height: 1px;
-            background: var(--glass-border);
+            background: rgba(255,255,255,0.08);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
-        /* Rectangular Glass Card with Fine Borders */
+        /* 3D Embossed LCD Card Design */
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            background: var(--card-surface);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-radius: var(--card-radius);
-            padding: 1.5rem;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+            padding: 2.2rem;
             position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+            
+            /* 3D Embossed Border Effect (Skeuomorphic) */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                /* Outer soft shadow */
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                /* Inner embossed highlight (top-left) */
+                inset 2px 2px 4px rgba(255, 255, 255, 0.1),
+                /* Inner embossed shadow (bottom-right) */
+                inset -2px -2px 6px rgba(0, 0, 0, 0.6);
         }
 
-        /* The specific "Glass Edge" highlight */
+        /* Subtle LCD Shine */
         .card::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0; left: 0; right: 0; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
             border-radius: var(--card-radius);
-            border: 1px solid transparent;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 40%) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
             pointer-events: none;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(44, 44, 46, 0.8);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.15),
+                inset -3px -3px 8px rgba(0, 0, 0, 0.7);
         }
 
         .header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
+            gap: 14px;
+            margin-bottom: 1.5rem;
         }
 
         .icon {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
         }
 
         h2 {
             margin: 0;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--text-secondary);
         }
 
         .price {
-            font-size: 2.2rem;
-            font-weight: 600;
+            font-size: 2.8rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            font-family: 'SF Mono', menlo, monospace;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
         }
 
         .change {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 6px;
-            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .up { color: var(--up); background: rgba(50, 215, 75, 0.1); }
-        .down { color: var(--down); background: rgba(255, 69, 58, 0.1); }
+        .up { color: var(--up); background: rgba(50, 215, 75, 0.1); border: 1px solid rgba(50, 215, 75, 0.2); }
+        .down { color: var(--down); background: rgba(255, 69, 58, 0.1); border: 1px solid rgba(255, 69, 58, 0.2); }
 
-        /* Alert System */
+        /* Alert System with 3D feel */
         .alert-box {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(0,0,0,0.2);
-            border-radius: 14px;
-            border: 1px solid var(--glass-edge);
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5);
         }
 
         .alert-input-group {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .alert-input {
-            background: #1c1c1e;
-            border: 1px solid var(--glass-border);
+            background: rgba(28, 28, 30, 0.9);
+            border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
             flex: 1;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .alert-btn {
-            background: var(--accent);
-            color: white;
+            background: var(--text-primary);
+            color: #000;
             border: none;
-            padding: 0 12px;
-            border-radius: 8px;
+            padding: 0 16px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: transform 0.2s;
         }
 
-        /* Widgets */
+        /* LCD Display Widgets */
         .widget-wrapper {
             border-radius: var(--card-radius);
             overflow: hidden;
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--card-surface);
+            border: 1px solid rgba(255,255,255,0.08);
             margin-bottom: 2rem;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.3),
+                inset 1px 1px 2px rgba(255,255,255,0.05);
         }
 
         /* Concept Cards */
         .concept-card {
-            background: var(--card-bg);
+            background: var(--card-surface);
             border-radius: var(--card-radius);
-            padding: 1.5rem;
-            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.05);
         }
 
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.1rem; }
-        .concept-card p { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0; }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+        .concept-card p { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 0; }
 
         footer {
-            margin: 5rem 0 3rem 0;
+            margin: 6rem 0 4rem 0;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-align: center;
+            opacity: 0.7;
         }
 
         #notification-toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(44, 44, 46, 0.9);
-            backdrop-filter: blur(15px);
+            top: 30px;
+            right: 30px;
+            background: rgba(28, 28, 30, 0.9);
+            backdrop-filter: blur(20px);
             color: white;
-            padding: 15px 25px;
-            border-radius: 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 20px 35px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             display: none;
             z-index: 1000;
-            border: 1px solid var(--glass-border);
-            animation: slideIn 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 600;
+            animation: appleSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes appleSlide {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Market Pulse</h1>
+        <h1>Global Liquid</h1>
 
-        <div class="widget-wrapper" style="height: 46px;">
+        <div class="widget-wrapper" style="height: 50px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
@@ -258,19 +282,19 @@
             </div>
         </div>
 
-        <div class="section-title">Crypto Assets</div>
+        <div class="section-title">Real-Time Markets</div>
         <div class="grid">
             <div class="card" id="btc-card">
                 <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">LCD Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="btc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('btc')">Set</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.7rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
             <div class="card" id="eth-card">
@@ -278,12 +302,12 @@
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">LCD Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="eth-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('eth')">Set</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.7rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
             <div class="card" id="etc-card">
@@ -291,12 +315,12 @@
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">LCD Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="etc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('etc')">Set</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.7rem; margin-top: 8px; color: var(--accent);"></div>
+                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
                 </div>
             </div>
         </div>
@@ -365,8 +389,8 @@
             </div>
         </div>
 
-        <div class="section-title">Market Timeline</div>
-        <div class="widget-wrapper" style="height: 500px;">
+        <div class="section-title">Timeline Stream</div>
+        <div class="widget-wrapper" style="height: 600px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
@@ -384,7 +408,7 @@
             </div>
         </div>
 
-        <div class="section-title">Learning Center</div>
+        <div class="section-title">Academy</div>
         <div class="grid">
             <div class="concept-card">
                 <h3>Spot Trading</h3>
@@ -405,7 +429,7 @@
         </div>
 
         <footer>
-            Space Gray Glass Edition • 2026
+            Liquid Crystal Experience by Ko Paing • 2026 Edition
         </footer>
     </div>
 
@@ -422,7 +446,9 @@
             const data = JSON.parse(event.data);
             const symbol = data.s.toLowerCase();
             const priceVal = parseFloat(data.c);
-            const priceStr = priceVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            const price = priceVal.toLocaleString(undefined, { 
+                minimumFractionDigits: 2
+            });
             const change = parseFloat(data.P).toFixed(2);
             
             let id = symbol.replace('usdt', '');
@@ -431,20 +457,20 @@
 
             if (priceEl) {
                 const oldPrice = parseFloat(priceEl.innerText.replace(/[$,]/g, '')) || 0;
-                priceEl.innerText = `$${priceStr}`;
-                changeEl.innerText = `${change > 0 ? '+' : ''}${change}%`;
+                priceEl.innerText = `$${price}`;
+                changeEl.innerText = `${change > 0 ? '▲' : '▼'} ${Math.abs(change)}%`;
                 changeEl.className = `change ${change >= 0 ? 'up' : 'down'}`;
 
                 if (priceVal > oldPrice && oldPrice !== 0) {
                     priceEl.style.color = '#32d74b';
-                    setTimeout(() => priceEl.style.color = '#fff', 500);
+                    setTimeout(() => priceEl.style.color = '#fff', 400);
                 } else if (priceVal < oldPrice && oldPrice !== 0) {
                     priceEl.style.color = '#ff453a';
-                    setTimeout(() => priceEl.style.color = '#fff', 500);
+                    setTimeout(() => priceEl.style.color = '#fff', 400);
                 }
 
                 if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`🔔 ALERT: ${id.toUpperCase()} reached $${priceStr}`);
+                    showNotification(`🛎️ LCD ALERT: ${id.toUpperCase()} hit $${price}`);
                     alerts[id] = null;
                     document.getElementById(`${id}-active-alert`).innerText = "";
                 }
@@ -455,8 +481,8 @@
             const val = document.getElementById(`${coin}-alert-input`).value;
             if (val) {
                 alerts[coin] = parseFloat(val);
-                document.getElementById(`${coin}-active-alert`).innerText = `Alert at $${parseFloat(val).toLocaleString()}`;
-                showNotification(`🔔 Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+                document.getElementById(`${coin}-active-alert`).innerText = `Active: $${parseFloat(val).toLocaleString()}`;
+                showNotification(`✨ Alert set on LCD for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
             }
         }
 
@@ -464,7 +490,7 @@
             const toast = document.getElementById('notification-toast');
             toast.innerText = msg;
             toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 5000);
+            setTimeout(() => { toast.style.display = 'none'; }, 6000);
         }
     </script>
 </body>
