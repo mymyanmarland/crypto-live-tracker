@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Liquid | Glass Edition</title>
+    <title>Market Liquid | Light Glass Edition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030712;
-            --glass-surface: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-highlight: rgba(255, 255, 255, 0.08);
-            --text-primary: #f8fafc;
-            --text-secondary: rgba(248, 250, 252, 0.5);
-            --accent: #38bdf8;
+            /* Light & Airy Palette */
+            --bg: #f0f4f8;
+            --glass-surface: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: rgba(31, 38, 135, 0.1);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #0ea5e9;
             --up: #10b981;
-            --down: #f43f5e;
-            --card-radius: 28px;
+            --down: #ef4444;
+            --card-radius: 24px;
         }
 
         * { 
@@ -29,8 +30,8 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(at 0% 0%, #0f172a 0, transparent 50%), 
-                radial-gradient(at 100% 100%, #1e1b4b 0, transparent 50%);
+                radial-gradient(at 0% 0%, #e0e7ff 0, transparent 50%), 
+                radial-gradient(at 100% 100%, #f0f9ff 0, transparent 50%);
             color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
             margin: 0;
@@ -48,18 +49,16 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 800;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             letter-spacing: -0.02em;
-            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
         }
 
         .section-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.15em;
@@ -74,50 +73,35 @@
             content: "";
             flex: 1;
             height: 1px;
-            background: var(--glass-border);
+            background: rgba(0,0,0,0.05);
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
-        /* Enhanced Glassmorphism Card */
+        /* Light Mode Glass Card with Prominent Borders */
         .card {
-            background: linear-gradient(135deg, var(--glass-surface) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
+            background: var(--glass-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid var(--glass-border);
             border-radius: var(--card-radius);
             padding: 2.5rem 2rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            overflow: hidden;
             box-shadow: 
-                0 10px 30px -10px rgba(0,0,0,0.5),
-                inset 0 1px 1px rgba(255,255,255,0.1);
-        }
-
-        /* Glass Shine Effect */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, var(--glass-highlight) 0%, transparent 100%);
-            pointer-events: none;
+                0 8px 32px 0 var(--glass-shadow),
+                inset 0 0 0 1px rgba(255,255,255,0.4);
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-            box-shadow: 
-                0 30px 60px -12px rgba(0,0,0,0.6),
-                inset 0 1px 1px rgba(255,255,255,0.2);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #fff;
+            box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.15);
         }
 
         .header {
@@ -128,46 +112,51 @@
         }
 
         .icon {
-            font-size: 1.5rem;
-            opacity: 0.9;
+            font-size: 1.8rem;
+            background: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         h2 {
             margin: 0;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            letter-spacing: 0.02em;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .price {
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             margin-bottom: 0.5rem;
-            letter-spacing: -0.03em;
-            color: #fff;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
         }
 
         .change {
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 6px 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 6px 16px;
             border-radius: 100px;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
         }
 
-        .up { color: var(--up); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
-        .down { color: var(--down); background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.2); }
+        .up { color: var(--up); background: rgba(16, 185, 129, 0.1); }
+        .down { color: var(--down); background: rgba(239, 68, 68, 0.1); }
 
         /* Alert Glass Style */
         .alert-box {
             margin-top: 2rem;
-            padding: 1.25rem;
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 18px;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
         .alert-input-group {
@@ -177,62 +166,59 @@
         }
 
         .alert-input {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 10px 15px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--text-primary);
+            padding: 12px 15px;
             border-radius: 12px;
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
             transition: all 0.3s;
         }
 
         .alert-input:focus {
             border-color: var(--accent);
-            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
         }
 
         .alert-btn {
-            background: #fff;
-            color: #000;
+            background: var(--text-primary);
+            color: white;
             border: none;
             padding: 0 20px;
             border-radius: 12px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            transition: transform 0.2s;
         }
 
-        .alert-btn:hover { transform: scale(1.05); }
-
-        /* Widget Containers */
+        /* Light Widget Wrapper */
         .widget-wrapper {
             border-radius: var(--card-radius);
             overflow: hidden;
             background: var(--glass-surface);
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--glass-border);
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 var(--glass-shadow);
         }
 
         /* Concept Cards */
         .concept-card {
             background: var(--glass-surface);
             border-radius: var(--card-radius);
-            padding: 2rem;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 var(--glass-shadow);
         }
 
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.2rem; }
-        .concept-card p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 0; }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.4rem; }
+        .concept-card p { font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 0; }
 
         footer {
             margin: 6rem 0 4rem 0;
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-align: center;
         }
 
@@ -240,21 +226,19 @@
             position: fixed;
             top: 30px;
             right: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: #fff;
-            padding: 20px 30px;
+            background: white;
+            color: var(--text-primary);
+            padding: 20px 35px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             display: none;
             z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-weight: 600;
-            animation: glassIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 2px solid var(--accent);
+            font-weight: 700;
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes glassIn {
+        @keyframes slideIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
@@ -262,7 +246,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Global Liquidity</h1>
+        <h1>Global Markets</h1>
 
         <!-- Ticker -->
         <div class="widget-wrapper" style="height: 40px;">
@@ -278,7 +262,7 @@
                     { "proName": "FX_IDC:USDMMK", "title": "USD/MMK" }
                 ],
                 "showSymbolLogo": true,
-                "colorTheme": "dark",
+                "colorTheme": "light",
                 "isTransparent": true,
                 "displayMode": "adaptive",
                 "locale": "en"
@@ -290,42 +274,42 @@
         <div class="section-title">Real-Time Crypto</div>
         <div class="grid">
             <div class="card" id="btc-card">
-                <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
+                <div class="header"><div class="icon">₿</div><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="btc-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('btc')">Set</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="btc-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
             <div class="card" id="eth-card">
-                <div class="header"><span class="icon">Ξ</span><h2>Ethereum</h2></div>
+                <div class="header"><div class="icon">Ξ</div><h2>Ethereum</h2></div>
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="eth-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('eth')">Set</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="eth-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
             <div class="card" id="etc-card">
-                <div class="header"><span class="icon">⟠</span><h2>ETC</h2></div>
+                <div class="header"><div class="icon">⟠</div><h2>ETC</h2></div>
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="etc-alert-input" class="alert-input" placeholder="Set target">
                         <button class="alert-btn" onclick="setAlert('etc')">Set</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="etc-active-alert" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent); font-weight: 600;"></div>
                 </div>
             </div>
         </div>
@@ -333,14 +317,14 @@
         <div class="section-title">Commodities & Stocks</div>
         <div class="grid">
             <div class="card">
-                <div class="header"><span class="icon">🟡</span><h2>Gold</h2></div>
+                <div class="header"><div class="icon">🟡</div><h2>Gold</h2></div>
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
                     {
                     "symbol": "TVC:GOLD",
                     "width": "100%",
-                    "colorTheme": "dark",
+                    "colorTheme": "light",
                     "isTransparent": true,
                     "locale": "en"
                     }
@@ -348,14 +332,14 @@
                 </div>
             </div>
             <div class="card">
-                <div class="header"><span class="icon">🛢️</span><h2>Crude Oil</h2></div>
+                <div class="header"><div class="icon">🛢️</div><h2>Crude Oil</h2></div>
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
                     {
                     "symbol": "TVC:UKOIL",
                     "width": "100%",
-                    "colorTheme": "dark",
+                    "colorTheme": "light",
                     "isTransparent": true,
                     "locale": "en"
                     }
@@ -363,14 +347,14 @@
                 </div>
             </div>
             <div class="card">
-                <div class="header"><span class="icon"></span><h2>Apple Inc.</h2></div>
+                <div class="header"><div class="icon"></div><h2>Apple Inc.</h2></div>
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
                     {
                     "symbol": "NASDAQ:AAPL",
                     "width": "100%",
-                    "colorTheme": "dark",
+                    "colorTheme": "light",
                     "isTransparent": true,
                     "locale": "en"
                     }
@@ -378,14 +362,14 @@
                 </div>
             </div>
              <div class="card">
-                <div class="header"><span class="icon">🟢</span><h2>NVIDIA</h2></div>
+                <div class="header"><div class="icon">🟢</div><h2>NVIDIA</h2></div>
                 <div class="tradingview-widget-container">
                     <div class="tradingview-widget-container__widget"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
                     {
                     "symbol": "NASDAQ:NVDA",
                     "width": "100%",
-                    "colorTheme": "dark",
+                    "colorTheme": "light",
                     "isTransparent": true,
                     "locale": "en"
                     }
@@ -402,7 +386,7 @@
                 {
                 "feedMode": "market",
                 "market": "crypto",
-                "colorTheme": "dark",
+                "colorTheme": "light",
                 "isTransparent": true,
                 "displayMode": "regular",
                 "width": "100%",
@@ -434,7 +418,7 @@
         </div>
 
         <footer>
-            Premium Glass Experience by Ko Paing • 2026 Edition
+            Clean Glass Design by Ko Paing • 2026 Edition
         </footer>
     </div>
 
@@ -466,15 +450,14 @@
 
                 if (priceVal > oldPrice && oldPrice !== 0) {
                     priceEl.style.color = '#10b981';
-                    setTimeout(() => priceEl.style.color = '#fff', 500);
+                    setTimeout(() => priceEl.style.color = 'var(--text-primary)', 500);
                 } else if (priceVal < oldPrice && oldPrice !== 0) {
-                    priceEl.style.color = '#f43f5e';
-                    setTimeout(() => priceEl.style.color = '#fff', 500);
+                    priceEl.style.color = '#ef4444';
+                    setTimeout(() => priceEl.style.color = 'var(--text-primary)', 500);
                 }
 
-                // Check Alert
                 if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`💎 GLASS ALERT: ${id.toUpperCase()} hit $${price}`);
+                    showNotification(`🚀 ALERT: ${id.toUpperCase()} hit $${price}`);
                     alerts[id] = null;
                     document.getElementById(`${id}-active-alert`).innerText = "";
                 }
@@ -485,8 +468,8 @@
             const val = document.getElementById(`${coin}-alert-input`).value;
             if (val) {
                 alerts[coin] = parseFloat(val);
-                document.getElementById(`${coin}-active-alert`).innerText = `Alert active at $${parseFloat(val).toLocaleString()}`;
-                showNotification(`✨ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+                document.getElementById(`${coin}-active-alert`).innerText = `Active: $${parseFloat(val).toLocaleString()}`;
+                showNotification(`🔔 Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
             }
         }
 
