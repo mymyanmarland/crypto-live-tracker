@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquid Market Pro | 3D Puddle Edition</title>
+    <title>Global Market Liquid | Crystal Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --liquid-bg: rgba(255, 255, 255, 0.03);
-            --liquid-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.5);
-            --accent: #0ea5e9;
-            --up: #34d399;
-            --down: #f87171;
+            --bg: #0f172a; /* Slate 900 - Lighter than black */
+            --glass-bg: rgba(30, 41, 59, 0.5); /* Lighter glass */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --up: #10b981;
+            --down: #f43f5e;
+            --card-radius: 24px;
         }
 
         * { 
@@ -27,8 +28,9 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 10% 20%, #111 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, #0a0a0a 0%, transparent 40%);
+                radial-gradient(at 0% 0%, #1e293b 0, transparent 50%), 
+                radial-gradient(at 50% 0%, #0f172a 0, transparent 50%), 
+                radial-gradient(at 100% 0%, #1e1b4b 0, transparent 50%);
             color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
             margin: 0;
@@ -37,228 +39,195 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
         }
 
         .container {
-            width: 90%;
+            width: 92%;
             max-width: 1400px;
-            padding: 4rem 0;
-            z-index: 1;
+            padding: 3rem 0;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
             text-align: center;
-            margin-bottom: 4rem;
-            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.3) 100%);
+            margin-bottom: 2.5rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .section-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-secondary);
-            margin: 5rem 0 3rem 0;
-            text-align: center;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin: 3.5rem 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        /* 3D Liquid Puddle Card Design */
+        /* Rectangular Card Design */
         .card {
-            background: var(--liquid-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--liquid-border);
-            /* Organic Puddle Shape */
-            border-radius: 60% 40% 70% 30% / 40% 60% 30% 70%;
-            padding: 3rem 2.5rem;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            box-shadow: 
-                inset 10px 10px 20px rgba(255,255,255,0.05),
-                inset -10px -10px 20px rgba(0,0,0,0.5),
-                20px 20px 40px rgba(0,0,0,0.6);
-            animation: morph 8s ease-in-out infinite alternate;
-        }
-
-        .card:nth-child(2n) {
-            border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;
-            animation-delay: -2s;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                inset 15px 15px 30px rgba(255,255,255,0.08),
-                inset -15px -15px 30px rgba(0,0,0,0.6),
-                30px 40px 60px rgba(0,0,0,0.8);
-        }
-
-        @keyframes morph {
-            0% { border-radius: 60% 40% 70% 30% / 40% 60% 30% 70%; }
-            100% { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            background: rgba(30, 41, 59, 0.7);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
 
         .header {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 1.5rem;
         }
 
         .icon {
-            font-size: 1.8rem;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            font-size: 1.5rem;
+            color: var(--accent);
         }
 
         h2 {
             margin: 0;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .price {
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            letter-spacing: -0.03em;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            font-family: monospace;
         }
 
         .change {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            backdrop-filter: blur(10px);
+            padding: 4px 10px;
+            border-radius: 8px;
+            display: inline-block;
         }
 
-        .up { color: var(--up); background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2); }
-        .down { color: var(--down); background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); }
+        .up { color: var(--up); background: rgba(16, 185, 129, 0.1); }
+        .down { color: var(--down); background: rgba(244, 63, 94, 0.1); }
 
-        /* Alert Input Liquid Style */
+        /* Alert Box */
         .alert-box {
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 1.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 16px;
+            padding: 1rem;
         }
 
         .alert-input-group {
             display: flex;
-            background: rgba(0,0,0,0.3);
-            border-radius: 50px;
-            padding: 5px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-
-        .alert-input-group:focus-within {
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .alert-input {
-            background: transparent;
-            border: none;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--glass-border);
             color: white;
-            padding: 10px 20px;
+            padding: 8px 12px;
+            border-radius: 10px;
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
         }
 
         .alert-btn {
-            background: var(--text-primary);
-            color: #000;
+            background: var(--accent);
+            color: #0f172a;
             border: none;
-            padding: 0 20px;
-            border-radius: 50px;
+            padding: 0 15px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            transition: transform 0.2s;
         }
 
-        .alert-btn:hover { transform: scale(1.05); }
-
-        /* Widget Liquid Wrapper */
+        /* Widgets */
         .widget-wrapper {
-            border-radius: 40px;
+            border-radius: var(--card-radius);
             overflow: hidden;
-            background: var(--liquid-bg);
-            border: 1px solid var(--liquid-border);
-            box-shadow: inset 5px 5px 15px rgba(255,255,255,0.05), 10px 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 1.5rem;
         }
 
-        /* Concept Cards */
+        /* Learning Cards */
         .concept-card {
-            background: var(--liquid-bg);
-            border-radius: 50px 20px 50px 20px;
-            padding: 2.5rem;
-            border: 1px solid var(--liquid-border);
-            backdrop-filter: blur(20px);
-            transition: all 0.4s;
+            background: var(--glass-bg);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
         }
 
-        .concept-card:hover { border-radius: 20px 50px 20px 50px; transform: scale(1.02); }
-        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
-        .concept-card p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 0; }
+        .concept-card h3 { color: var(--accent); margin-top: 0; font-size: 1.1rem; }
+        .concept-card p { font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 0; }
 
         footer {
-            margin: 8rem 0 4rem 0;
+            margin: 5rem 0 3rem 0;
             color: var(--text-secondary);
             font-size: 0.8rem;
             text-align: center;
-            opacity: 0.6;
         }
 
         #notification-toast {
             position: fixed;
-            top: 40px;
-            right: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            color: white;
-            padding: 25px 40px;
-            border-radius: 100px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: #0f172a;
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
             display: none;
             z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: liquidIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            font-weight: 600;
+            animation: slideIn 0.3s ease-out;
         }
 
-        @keyframes liquidIn {
-            from { opacity: 0; transform: translateY(-50px) scale(0.8); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Market Liquid</h1>
+        <h1>Market Intelligence</h1>
 
-        <!-- Ticker Wrapper -->
-        <div class="widget-wrapper" style="height: 60px;">
+        <!-- Ticker -->
+        <div class="widget-wrapper" style="height: 40px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
@@ -280,50 +249,53 @@
             </div>
         </div>
 
-        <div class="section-title">Crypto Current Flow</div>
+        <div class="section-title">Real-Time Crypto</div>
         <div class="grid">
+            <!-- BTC -->
             <div class="card" id="btc-card">
                 <div class="header"><span class="icon">₿</span><h2>Bitcoin</h2></div>
                 <div class="price" id="btc-price">$--</div>
                 <div class="change" id="btc-change">0.00%</div>
                 <div class="alert-box">
-                    <h2 style="font-size: 0.75rem; margin-bottom: 8px;">Target Alert</h2>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="btc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('btc')">Set</button>
                     </div>
-                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="btc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
+            <!-- ETH -->
             <div class="card" id="eth-card">
                 <div class="header"><span class="icon">Ξ</span><h2>Ethereum</h2></div>
                 <div class="price" id="eth-price">$--</div>
                 <div class="change" id="eth-change">0.00%</div>
                 <div class="alert-box">
-                    <h2 style="font-size: 0.75rem; margin-bottom: 8px;">Target Alert</h2>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="eth-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('eth')">Set</button>
                     </div>
-                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="eth-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
+            <!-- ETC -->
             <div class="card" id="etc-card">
                 <div class="header"><span class="icon">⟠</span><h2>ETC</h2></div>
                 <div class="price" id="etc-price">$--</div>
                 <div class="change" id="etc-change">0.00%</div>
                 <div class="alert-box">
-                    <h2 style="font-size: 0.75rem; margin-bottom: 8px;">Target Alert</h2>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary);">Set Price Alert</div>
                     <div class="alert-input-group">
                         <input type="number" id="etc-alert-input" class="alert-input" placeholder="Price">
                         <button class="alert-btn" onclick="setAlert('etc')">Set</button>
                     </div>
-                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 10px; color: var(--accent);"></div>
+                    <div id="etc-active-alert" style="font-size: 0.75rem; margin-top: 8px; color: var(--accent);"></div>
                 </div>
             </div>
         </div>
 
-        <div class="section-title">Assets & Commodities</div>
+        <div class="section-title">Commodities & Stocks</div>
         <div class="grid">
             <div class="card">
                 <div class="header"><span class="icon">🟡</span><h2>Gold</h2></div>
@@ -387,8 +359,8 @@
             </div>
         </div>
 
-        <div class="section-title">Market Pulse</div>
-        <div class="widget-wrapper" style="height: 600px; border-radius: 50px;">
+        <div class="section-title">Market Pulse & News</div>
+        <div class="widget-wrapper" style="height: 500px;">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
@@ -427,7 +399,7 @@
         </div>
 
         <footer>
-            Live Puddles by Ko Paing • Binance & TradingView API • 2026
+            Crystal Analytics by Ko Paing • Binance & TradingView API • 2026
         </footer>
     </div>
 
@@ -444,9 +416,7 @@
             const data = JSON.parse(event.data);
             const symbol = data.s.toLowerCase();
             const priceVal = parseFloat(data.c);
-            const price = priceVal.toLocaleString(undefined, { 
-                minimumFractionDigits: 2
-            });
+            const price = priceVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
             const change = parseFloat(data.P).toFixed(2);
             
             let id = symbol.replace('usdt', '');
@@ -456,20 +426,20 @@
             if (priceEl) {
                 const oldPrice = parseFloat(priceEl.innerText.replace(/[$,]/g, '')) || 0;
                 priceEl.innerText = `$${price}`;
-                changeEl.innerText = `${change > 0 ? '▲' : '▼'} ${Math.abs(change)}%`;
+                changeEl.innerText = `${change > 0 ? '+' : ''}${change}%`;
                 changeEl.className = `change ${change >= 0 ? 'up' : 'down'}`;
 
                 if (priceVal > oldPrice && oldPrice !== 0) {
-                    priceEl.style.color = '#34d399';
-                    setTimeout(() => priceEl.style.color = '#fff', 400);
+                    priceEl.style.color = '#10b981';
+                    setTimeout(() => priceEl.style.color = '#f8fafc', 500);
                 } else if (priceVal < oldPrice && oldPrice !== 0) {
-                    priceEl.style.color = '#f87171';
-                    setTimeout(() => priceEl.style.color = '#fff', 400);
+                    priceEl.style.color = '#f43f5e';
+                    setTimeout(() => priceEl.style.color = '#f8fafc', 500);
                 }
 
                 // Check Alert
                 if (alerts[id] && priceVal >= alerts[id]) {
-                    showNotification(`🌊 WAVE ALERT: ${id.toUpperCase()} reached $${price}`);
+                    showNotification(`🔔 ALERT: ${id.toUpperCase()} reached target $${alerts[id]}`);
                     alerts[id] = null;
                     document.getElementById(`${id}-active-alert`).innerText = "";
                 }
@@ -480,8 +450,8 @@
             const val = document.getElementById(`${coin}-alert-input`).value;
             if (val) {
                 alerts[coin] = parseFloat(val);
-                document.getElementById(`${coin}-active-alert`).innerText = `Drop at $${parseFloat(val).toLocaleString()}`;
-                showNotification(`💧 Alert set in the puddle for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
+                document.getElementById(`${coin}-active-alert`).innerText = `Active Alert at $${parseFloat(val).toLocaleString()}`;
+                showNotification(`✅ Alert set for ${coin.toUpperCase()} at $${parseFloat(val).toLocaleString()}`);
             }
         }
 
